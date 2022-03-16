@@ -11,7 +11,7 @@ extern pros::Controller master;
 #define MR1_PORT 20
 #define MR2_PORT 19
 #define MR3_PORT 18
-#define LIFT_PORT 9
+#define ARM_PORT 9
 #define CONV_PORT 1
 
 

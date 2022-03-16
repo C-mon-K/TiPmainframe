@@ -18,11 +18,10 @@ extern pros::Motor MR3;
 class SixMotorDrive {
 public:
     SixMotorDrive();
-    int mapToExponential(int value);
-private:
-    void driveExponentialArcade(pros::controller_analog_e_t powerStick, pros::controller_analog_e_t turnStick);
     void move(int left, int right);
     void move_voltage(int left, int right);
+    void driveExponentialArcade(); 
+    int mapToExponential(int value);
 
 };
 

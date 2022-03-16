@@ -15,7 +15,7 @@ void autonomous() {}
 
 void opcontrol() {
 	while(true) {
-		drive.driveExponentialArcade(pros::E_CONTROLLER_ANALOG_LEFT_Y, pros::E_CONTROLLER_ANALOG_LEFT_X);
+		drive.driveExponentialArcade();
 		pros::delay(20);
 	}
 }

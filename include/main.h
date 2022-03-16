@@ -75,6 +75,7 @@ void opcontrol(void);
 
 #include "drive.h"
 #include "ports.h"
+#include "arm.h"
 
 #endif
 

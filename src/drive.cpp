@@ -17,31 +17,34 @@ SixMotorDrive::SixMotorDrive() {
 }
 
 void SixMotorDrive::move(int left, int right) {
-    left = left/255*12000;
-    right = right/255*12000;
-    SixMotorDrive::move_voltage(left, right);
+    ML1.move(left);
+    ML2.move(left);
+    ML3.move(left);
+    MR1.move(right);
+    MR2.move(right);
+    MR3.move(right);
 }
 
 void SixMotorDrive::move_voltage(int left, int right) {
-    ML1.move_velocity(left);
-    ML2.move_velocity(left);
-    ML3.move_velocity(left);
-    MR1.move_velocity(right);
-    MR2.move_velocity(right);
-    MR3.move_velocity(right);
+    ML1.move_voltage(left);
+    ML2.move_voltage(left);
+    ML3.move_voltage(left);
+    MR1.move_voltage(right);
+    MR2.move_voltage(right);
+    MR3.move_voltage(right);
 }
 
-void SixMotorDrive::driveExponentialArcade(pros::controller_analog_e_t powerStick, pros::controller_analog_e_t turnStick) {
-    int power = master.get_analog(powerStick);
-    int turn = master.get_analog(turnStick);
+void SixMotorDrive::driveExponentialArcade() {
+    int power = master.get_analog(ANALOG_LEFT_Y);
+    int turn = master.get_analog(ANALOG_LEFT_X);
 
-    int left = (power + turn)/2;
-    int right = (power - turn)/2;
+    int left = power + turn;
+    int right = power - turn;
 
-    //left = mapToExponential(left);
-    //right = mapToExponential(right);
+    left = SixMotorDrive::mapToExponential(left);
+    right = SixMotorDrive::mapToExponential(right);
 
-    move(left, right);
+    SixMotorDrive::move(left, right);
 }
 
 int SixMotorDrive::mapToExponential(int value) {
