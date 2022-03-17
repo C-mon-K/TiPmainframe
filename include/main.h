@@ -41,6 +41,9 @@
  */
 //#include "okapi/api.hpp"
 //#include "pros/api_legacy.h"
+#include "drive.h"
+#include "ports.h"
+#include "arm.h"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
@@ -73,9 +76,6 @@ void opcontrol(void);
 
 #ifdef __cplusplus
 
-#include "drive.h"
-#include "ports.h"
-#include "arm.h"
 
 #endif
 

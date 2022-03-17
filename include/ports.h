@@ -1,3 +1,15 @@
+/**
+ * @file ports.h
+ * @author Simon Kloos (sk.dev@alb.one)
+ * @brief Contains all defines for ports and controller main declarations
+ * @version 0.1
+ * @date 2022-03-15
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
+
 #pragma once
 
 #include "main.h"

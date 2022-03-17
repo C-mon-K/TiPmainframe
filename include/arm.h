@@ -1,3 +1,14 @@
+/**
+ * @file arm.h
+ * @author Simon Kloos (sk.dev@alb.one)
+ * @brief arm header file
+ * @version 0.1
+ * @date 2022-03-15
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #pragma once
 
 #include "main.h"
@@ -11,8 +22,9 @@ extern pros::Rotation ROT_ARM;
 class Arm{
 public:
     Arm();
-private:
+    void operate();
     void moveUp();
     void moveDown();
-    void moveTo(int degrees);
+    void stop();
+    void moveTo(int angle);
 };
