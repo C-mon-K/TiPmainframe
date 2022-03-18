@@ -30,8 +30,8 @@ void Arm::operate() {
     bool negative = input < 0;
     int angle = ROT_ARM.get_angle();
 
-    if((positive && 95 < angle < 300) || (negative && (angle < 5 || angle > 300))) return;
-     ARM.move(input);
+    if((positive && 9500 < angle < 30000) || (negative && (angle < 500 || angle > 30000))) return;
+    ARM.move(input);
 }
 
 /**
