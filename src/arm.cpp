@@ -25,14 +25,28 @@ pros::Rotation ROT_ARM (ROT_ARM_PORT);
 Arm::Arm() {}
 
 void Arm::operate() {
-    int input = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+    int input = master.get_analog(STICK_ARM);
     bool positive = input > 0;
     bool negative = input < 0;
     int angle = ROT_ARM.get_angle();
+    
+    //master.print(2, 0, "ARM ANGLE: %d", angle);
 
-    if((positive && 9500 < angle < 30000) || (negative && (angle < 500 || angle > 30000))) return;
+    //if(positive && 30000 > angle > 95000) return;
+    //if(negative && (angle < 500 || angle > 30000)) return;
+    if((positive && (angle > 9500 && angle < 30000)) || (negative && (angle <500 || angle > 30000))) {
+        ARM.move(0);
+        return;
+    }
+    //if((positive && (9500 < angle < 30000)) || (negative && (angle < 500 || angle > 30000))) return;
     ARM.move(input);
 }
+
+void Arm::init() {
+    ARM.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+}
+
+
 
 /**
  * @brief Moves up the lift at DRIVE_UP_SPEED. 
@@ -76,6 +90,7 @@ void Arm::stop() {
  * @param degrees 
  */
 void Arm::moveTo(int angle) {
+    angle = angle*100;
     while(angle > ROT_ARM.get_angle() && ROT_ARM.get_angle()<70) {
         ARM.move(100);
     }

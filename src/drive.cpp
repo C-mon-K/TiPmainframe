@@ -1,6 +1,6 @@
 /**
  * @file drive.cpp
- * @author Simon Kloos
+ * @author Simon Kloos - Jacob Thompson
  * @brief class containing all drive functions
  * @version 0.1
  * @date 2022-03-15
@@ -11,12 +11,14 @@
 
 #include "main.h"
 
+bool holding = false;
+
 pros::Motor ML1 (ML1_PORT, true);
-pros::Motor ML2 (ML2_PORT, true);
-pros::Motor ML3 (ML3_PORT, false);
+pros::Motor ML2 (ML2_PORT, false);
+pros::Motor ML3 (ML3_PORT, true);
 pros::Motor MR1 (MR1_PORT, false);
-pros::Motor MR2 (MR2_PORT, false);
-pros::Motor MR3 (MR3_PORT, true);
+pros::Motor MR2 (MR2_PORT, true);
+pros::Motor MR3 (MR3_PORT, false);
 
 SixMotorDrive::SixMotorDrive() {
     ML1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
@@ -25,6 +27,7 @@ SixMotorDrive::SixMotorDrive() {
     MR1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
     MR2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
     MR3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    holding = false;
 }
 
 void SixMotorDrive::move(int left, int right) {
@@ -46,8 +49,8 @@ void SixMotorDrive::move_voltage(int left, int right) {
 }
 
 void SixMotorDrive::driveExponentialArcade() {
-    int power = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-    int turn = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+    int power = master.get_analog(STICK_DRIVE_POWER);
+    int turn = master.get_analog(STICK_DRIVE_TURN);
 
     int left = power + turn;
     int right = power - turn;
@@ -55,9 +58,9 @@ void SixMotorDrive::driveExponentialArcade() {
     int expLeft = SixMotorDrive::mapToExponential(left);
     int expRight = SixMotorDrive::mapToExponential(right);
 
-    std::cout<<left<<" "<<expLeft<<"   "<<right<<" "<<expRight<<std::endl;
-
     SixMotorDrive::move(expLeft, expRight);
+
+    if(master.get_digital_new_press(BUTTON_TOGGLE_DRIVE_BRAKE)) toggleBrake();
 }
 
 int SixMotorDrive::mapToExponential(int value) {
@@ -68,4 +71,25 @@ int SixMotorDrive::mapToExponential(int value) {
     if(negative) newValue = -newValue;
     newValue = newValue*127/100;
     return newValue;
+}
+
+void SixMotorDrive::toggleBrake() {
+    if(!holding) {
+        ML1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+        ML2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+        ML3.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+        MR1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+        MR2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+        MR3.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+        holding = true;
+    }
+    else {
+        ML1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+        ML2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+        ML3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+        MR1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+        MR2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+        MR3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+        holding = false;
+    }
 }

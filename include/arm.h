@@ -19,6 +19,8 @@
 extern pros::Motor ARM;
 extern pros::Rotation ROT_ARM;
 
+
+
 class Arm{
 public:
     Arm();
@@ -26,5 +28,9 @@ public:
     void moveUp();
     void moveDown();
     void stop();
+    void init();
+    static bool isArmLow() {
+        return ROT_ARM.get_angle() < 1000;
+    };
     void moveTo(int angle);
 };

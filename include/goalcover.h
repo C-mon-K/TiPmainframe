@@ -2,12 +2,12 @@
 
 #include "main.h"
 
-class LockingClamp {
+class Goalcover {
 public:
-    LockingClamp();
+    Goalcover();
     void init();
+    void down();
+    void up();
     void toggle();
-    void close();
-    void open();
     void operate();
 };
