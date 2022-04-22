@@ -29,10 +29,12 @@ extern pros::Controller master;
 
 //Sensor ports
 #define ROT_ARM_PORT 10
-#define DECH_MECH_PORT 0
-#define INERT_PORT 0
-#define LED_GREEN_PORT 'G'
-#define LED_RED_PORT 'H'
+//#define DECH_MECH_PORT 0
+#define INERT_PORT 20
+#define DIST_REAR_PORT 21
+#define LED_GREEN_PORT 'F'
+#define LED_RED_PORT 'G'
+#define LED_YELLOW_PORT 'H'
 
 //Pneumatic ports
 #define CLAMP_PORT 'A'

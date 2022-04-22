@@ -2,6 +2,10 @@
 
 #include "main.h"
 
+/**
+ * @class 
+ * 
+ */
 class RingMech {
 public:
    RingMech();

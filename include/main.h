@@ -62,20 +62,37 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
 void autonomous(void);
 void initialize(void);
 void disabled(void);
 void competition_initialize(void);
 void opcontrol(void);
+bool isAutonPhase(void);
+void armAuton();
+void LLEMUbtn1();
+void LLEMUbtn2();
+void LLEMUbtn3();
+void auton1();
+void auton2();
+void auton3();
+void runAuton();
+
 
 #include "drive.h"
 #include "ports.h"
+#include "ringmech.h"
 #include "arm.h"
 #include "claw.h"
 #include "mogomech.h"
 #include "controls.h"
 #include "goalcover.h"
-#include "ringmech.h"
+#include "pid.h"
+
+SixMotorDrive getDrive();
+
+extern RingMech ringmech;
+extern SemicolonMogoMech mogomech;
 
 #ifdef __cplusplus
 }

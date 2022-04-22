@@ -22,8 +22,7 @@ public:
     void move_voltage(int left, int right);
     void driveExponentialArcade(); 
     int mapToExponential(int value);
-    void toggleBrake();
-
+    void init();
 };
 
 

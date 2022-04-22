@@ -29,6 +29,9 @@ public:
     void moveDown();
     void stop();
     void init();
+    static void shake();
+    void home();
+    void up();
     static bool isArmLow() {
         return ROT_ARM.get_angle() < 1000;
     };
